@@ -10,6 +10,9 @@ const PITCH =
   "Tell me the app idea you've been carrying around, and tonight an AI agent on make.fun will build you a first version of it for free — you just describe it in plain words, no code, no risk, and you keep the idea either way.";
 
 const outDir = process.env.OUTPUT_DIR ?? "/output";
+if (PITCH.length < 1 || PITCH.length > 240) {
+  throw new Error(`Pitch must be 1-240 characters, got ${PITCH.length}`);
+}
 mkdirSync(outDir, { recursive: true });
 writeFileSync(`${outDir}/entry.txt`, PITCH, "utf8");
 console.log(`Wrote ${PITCH.length} characters to ${outDir}/entry.txt`);
